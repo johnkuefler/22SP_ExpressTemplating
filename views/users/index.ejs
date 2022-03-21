@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <% include ../partials/header %>
+
+  <body>
+    <% include ../partials/navbar %>
+
+    <div class="container">
+      <h1>Users</h1>
+
+      <table class="table">
+
+        <% for (let i=0; i < users.length; i++) { %>
+          <tr>
+            <td><%= users[i].name %></td>
+            <td><%= users[i].email %></td>
+            <td><%= users[i].username %></td>
+            <td><%= users[i].address.city %></td>
+          </tr>
+        <% } %>
+
+      </table>
+    </div>
+
+
+    <% include ../partials/scripts %>
+  </body>
+</html>

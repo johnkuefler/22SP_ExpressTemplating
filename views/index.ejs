@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+
+<% include ./partials/header %>
+
+  <body>
+
+    <% include ./partials/navbar %>
+
+      <div class="container">
+        <h1>Hello, world!</h1>
+      
+
+      <p><%= author %></p>
+
+      <% if (active == true) { %>
+        <p>This person is active!</p>
+      <% } else { %>
+        <p>This person is not active</p>
+      <% } %>
+    </div>
+
+
+            <% include ./partials/scripts %>
+  </body>
+
+</html>

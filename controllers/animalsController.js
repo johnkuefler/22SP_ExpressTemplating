@@ -1,7 +1,18 @@
 let Animal = require('../models/animalSchema');
 
 exports.get_animals = function (req, res) {
-    res.render('animals/index');
+    Animal.find({ }, function (err, data) {
+        if (err) {
+           console.log(err);
+        } else {
+            console.log(data);
+            res.render('animals/index', {animals: data} );
+        }
+    })
+}
+
+exports.get_create_animal = function (req, res) {
+    res.render('animals/create');
 }
 
 exports.post_animal = function (req, res) {

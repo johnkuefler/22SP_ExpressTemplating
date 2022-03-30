@@ -10,9 +10,11 @@ var usersRouter = require('./routes/users');
 var animalsRouter = require('./routes/animals');
 var loginRouter = require('./routes/login');
 
+require('dotenv').config({ path: __dirname + '/.env' })
+
 var app = express();
 
-mongoose.connect('xxxx',{ useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env['CONNECTION_STRING'], { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 // view engine setup
@@ -31,12 +33,12 @@ app.use('/animals', animalsRouter);
 app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

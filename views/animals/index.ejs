@@ -8,13 +8,21 @@
       <div class="container">
         <h1>Animals</h1>
 
-        <form method="POST" action="/animals/create">
-          <input type="text" name="species" placeholder="Species"/>
-          <input type="text" name="nickName" placeholder="Nickname"/>
-          <input type="text" name="status" placeholder="Status"/>
+        <a href="/animals/create">Create a new animal</a>
 
-          <input type="Submit" value="Submit"/>
-        </form>
+        
+        <table class="table">
+
+          <% for (let i=0; i < animals.length; i++) { %>
+            <tr>
+              <td><%= animals[i].species %></td>
+              <td><%= animals[i].nickName %></td>
+              <td><%= animals[i].status %></td>
+            </tr>
+          <% } %>
+  
+        </table>
+
       </div>
 
       <% include ../partials/scripts %>

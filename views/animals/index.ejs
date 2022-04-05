@@ -8,24 +8,54 @@
       <div class="container">
         <h1>Animals</h1>
 
-        <a href="/animals/create">Create a new animal</a>
+        <a class="btn btn-success mt-2 mb-3" href="/animals/create">+ Create</a>
 
-        
-        <table class="table">
+        <table id="animalTable" class="table table-bordered table-striped">
+
+          <thead>
+            <tr>
+              <td>Species</td>
+              <td>NickName</td>
+              <td>Status</td>
+              <td>Create Date</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
 
           <% for (let i=0; i < animals.length; i++) { %>
             <tr>
-              <td><%= animals[i].species %></td>
-              <td><%= animals[i].nickName %></td>
-              <td><%= animals[i].status %></td>
+              <td>
+                <%= animals[i].species %>
+              </td>
+              <td>
+                <%= animals[i].nickName %>
+              </td>
+              <td>
+                <%= animals[i].status %>
+              </td>
+              <td>
+                <%= animals[i].createDate %>
+              </td>
+              <td><a href="/animals/update?id=<%=animals[i]._id%>">Update</a>
+                | <a href="/animals/delete?id=<%=animals[i]._id%>"
+                  onclick="return confirm('Are you sure, you want to delete it?')">Delete</a></td>
             </tr>
-          <% } %>
-  
+            <% } %>
+
         </table>
 
       </div>
 
       <% include ../partials/scripts %>
+
+        <script type="text/javascript">
+          $(document).ready(function () {
+            $('#animalTable').DataTable({
+              responsive: true
+            });
+          });
+        </script>
+
   </body>
 
 </html>

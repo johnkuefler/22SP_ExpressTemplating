@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<% include ../partials/header %>
+
+  <body>
+    <% include ../partials/navbar %>
+
+      <div class="container">
+        <h1>Update Animal</h1>
+
+        <form method="POST" action="/animals/update">
+          <input type="hidden" name="id" value="<%=data._id%>" />
+
+          <input type="text" name="species" placeholder="Species"  value="<%=data.species%>"/>
+          <input type="text" name="nickName" placeholder="Nickname" value="<%=data.nickName%>"/>
+          <input type="text" name="status" placeholder="Status" value="<%=data.status%>"/>
+
+          <input type="Submit" value="Submit"/>
+        </form>
+      </div>
+
+      <% include ../partials/scripts %>
+  </body>
+
+</html>

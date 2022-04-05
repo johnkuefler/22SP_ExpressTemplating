@@ -6,12 +6,13 @@
     <% include ../partials/navbar %>
 
       <div class="container">
-        <h1>Animals</h1>
+        <h1>Create Animal</h1>
 
         <form method="POST" action="/animals/create">
           <input type="text" name="species" placeholder="Species"/>
           <input type="text" name="nickName" placeholder="Nickname"/>
           <input type="text" name="status" placeholder="Status"/>
+          <input type="date" name="createDate" placeholder="Date"/>
 
           <input type="Submit" value="Submit"/>
         </form>

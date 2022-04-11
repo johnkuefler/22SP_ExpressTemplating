@@ -1,15 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">Animal Tracker</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Animal Tracker</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+
+        <% if (locals.user) { %>
           <a class="nav-link" href="/animals">Animals</a>
           <a class="nav-link" href="/users">Users</a>
-          <a class="nav-link" href="/login">Login</a>
-        </div>
+          <a class="nav-link" href="/account/logout">Log out</a>
+        <% } else { %>
+          <a class="nav-link" href="/account/login">Login</a>
+          <a class="nav-link" href="/account/signup">Sign up</a>
+        <% } %>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>

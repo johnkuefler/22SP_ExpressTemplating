@@ -4,17 +4,48 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+var passport = require('passport');
+var flash = require('connect-flash');
+var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var animalsRouter = require('./routes/animals');
-var loginRouter = require('./routes/login');
+var accountRouter = require('./routes/accounts');
+
 
 require('dotenv').config({ path: __dirname + '/.env' })
 
 var app = express();
 
 mongoose.connect(process.env['CONNECTION_STRING'], { useNewUrlParser: true, useUnifiedTopology: true });
+
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
+app.use(bodyParser.json());
+var session = require('express-session');
+
+require('./config/passport')(passport);
+
+// required for passport
+app.use(session({
+  secret: 'devkey',
+  resave: true,
+  saveUninitialized: true,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
+
+
+app.use(cookieParser()); // read cookies (needed for auth)
 
 
 // view engine setup
@@ -24,13 +55,12 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/animals', animalsRouter);
-app.use('/login', loginRouter);
+app.use('/account', accountRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

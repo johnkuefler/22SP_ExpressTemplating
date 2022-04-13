@@ -7,15 +7,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
+        <a class="nav-link" href="/animals">Animals</a>
 
-        <% if (locals.user) { %>
-          <a class="nav-link" href="/animals">Animals</a>
+        <% if (locals.user.role === 'Admin') { %>
           <a class="nav-link" href="/users">Users</a>
-          <a class="nav-link" href="/account/logout">Log out</a>
-        <% } else { %>
-          <a class="nav-link" href="/account/login">Login</a>
-          <a class="nav-link" href="/account/signup">Sign up</a>
         <% } %>
+
+        <a class="nav-link" href="/account/logout">Log out</a>
       </div>
     </div>
   </div>

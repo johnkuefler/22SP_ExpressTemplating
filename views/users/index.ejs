@@ -8,14 +8,30 @@
     <div class="container">
       <h1>Users</h1>
 
-      <table class="table">
+      <a class="btn btn-success mt-2 mb-3" href="/users/create">+ Create</a>
+
+      <table class="table table-bordered table-striped" id="usersTable">
+        <thead>
+          <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Email</td>
+            <td>Role</td>
+            <td>Register Date</td>
+            <td>Actions</td>
+          </tr>
+        </thead>
 
         <% for (let i=0; i < users.length; i++) { %>
           <tr>
-            <td><%= users[i].name %></td>
+            <td><%= users[i].firstName %></td>
+            <td><%= users[i].lastName %></td>
             <td><%= users[i].email %></td>
-            <td><%= users[i].username %></td>
-            <td><%= users[i].address.city %></td>
+            <td><%= users[i].role %></td>
+            <td><%= users[i].registerDate %></td>
+            <td><a href="/users/update?id=<%=users[i]._id%>">Update</a>
+              | <a href="/users/delete?id=<%=users[i]._id%>"
+                onclick="return confirm('Are you sure, you want to delete it?')">Delete</a></td>
           </tr>
         <% } %>
 
@@ -24,5 +40,14 @@
 
 
     <% include ../partials/scripts %>
+
+    
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#usersTable').DataTable({
+          responsive: true
+        });
+      });
+    </script>
   </body>
 </html>

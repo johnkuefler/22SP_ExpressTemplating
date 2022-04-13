@@ -8,17 +8,8 @@
     <% include ./partials/navbar %>
 
       <div class="container">
-        <h1>Hello, world!</h1>
-      
-
-      <p><%= author %></p>
-
-      <% if (active == true) { %>
-        <p>This person is active!</p>
-      <% } else { %>
-        <p>This person is not active</p>
-      <% } %>
-    </div>
+        <h1>Hi <%=locals.user.firstName %> <%=locals.user.lastName %></h1>
+    
 
 
             <% include ./partials/scripts %>

@@ -28,7 +28,23 @@
                         </div>
                         <div class="form-group">
                             <label>Role</label>
-                            <input required type="text" class="form-control" name="role" value="<%=data.role%>">
+                            <select required type="text" class="form-control" name="role">
+                                <% if (data.role === 'Data Entry Specialist') { %>
+                                    <option selected>Data Entry Specialist</option>
+                                <% } else { %>
+                                    <option>Data Entry Specialist</option>
+                                <% } %>
+                                <% if (data.role === 'Quality Control') { %>
+                                    <option selected>Quality Control</option>
+                                <% } else { %>
+                                    <option>Quality Control</option>
+                                <% } %>                               
+                                <% if (data.role === 'Admin') { %>
+                                    <option selected>Admin</option>
+                                <% } else { %>
+                                    <option>Admin</option>
+                                <% } %>                             
+                            </select>                        
                         </div>
                         <div class="form-group">
                             <p>If you specify a password, the users password will be changed.</p>

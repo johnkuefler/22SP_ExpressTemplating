@@ -10,7 +10,11 @@
       <div class="container">
         <h1>Hi <%=locals.user.firstName %> <%=locals.user.lastName %></h1>
     
+        <a href="/animals">Manage animals</a><br>
 
+        <% if(locals.user.role === 'Admin') { %>
+          <a href="/users">Manage users</a>
+        <% } %>
 
             <% include ./partials/scripts %>
   </body>

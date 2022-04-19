@@ -13,4 +13,7 @@ router.post('/update', authMiddleware.ensureAuthenticated, animalsController.pos
 
 router.get('/delete', authMiddleware.ensureAuthenticated, animalsController.get_delete_animal);
 
+router.get('/export/csv', authMiddleware.ensureIsAdminOrQualityControl, animalsController.get_exports_animals_csv);
+router.get('/export/excel', authMiddleware.ensureIsAdminOrQualityControl, animalsController.get_exports_animals_excel);
+
 module.exports = router;

@@ -1,4 +1,5 @@
 let Animal = require('../models/animalSchema');
+const excel = require('exceljs');
 
 exports.get_animals = function (req, res) {
     Animal.find({}, function (err, data) {
@@ -76,3 +77,52 @@ exports.get_delete_animal = function (req, res) {
         }
     });
 };
+
+exports.get_exports_animals_csv = async function (req, res) {
+    const animals = await Animal.find({});
+
+    let csv = 'Species,Nickname,Status,Create Date\r\n';
+    animals.forEach((animal) => {
+        csv += "\"" + animal.species + "\"" + ','
+            + "\"" + animal.nickName + "\"" + ','
+            + "\"" + animal.status + "\"" + ','
+            + "\"" + animal.createDate + "\"" + '\r\n';
+    });
+
+    res.header('Content-Type', 'text/csv');
+    res.attachment('output.csv');
+    return res.send(csv);
+};
+
+exports.get_exports_animals_excel = async function (req, res) {
+    const workbook = new excel.Workbook();
+    const worksheet = workbook.addWorksheet('Animals');
+
+    const animals = await Animal.find({});
+
+    console.log(animals);
+
+    worksheet.columns = [
+        { header: 'Species', key: 'species', width: 15 },
+        { header: 'Nickname', key: 'nickName:', width: 25 },
+        { header: 'Status', key: 'status:', width: 25 },
+        { header: 'Create Date', key: 'createDate:', width: 25 },
+    ];
+
+    worksheet.addRows(animals);
+
+    res.setHeader(
+        'Content-Type',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    );
+    res.setHeader(
+        'Content-Disposition',
+        'attachment; filename=' + 'animals.xlsx',
+    );
+    return workbook.xlsx.write(res).then(function () {
+        res.status(200).end();
+    });
+
+};
+
+

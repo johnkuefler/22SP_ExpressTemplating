@@ -10,6 +10,11 @@
 
         <a class="btn btn-success mt-2 mb-3" href="/animals/create">+ Create</a>
 
+        <% if (locals.user.role === 'Quality Control' || locals.user.role === 'Admin') { %>
+          <a class="btn btn-success mt-2 mb-3" href="/animals/export/csv">> Export to CSV</a>
+          <a class="btn btn-success mt-2 mb-3" href="/animals/export/excel">> Export to Excel</a>
+        <% } %>
+
         <table id="animalTable" class="table table-bordered table-striped">
 
           <thead>
